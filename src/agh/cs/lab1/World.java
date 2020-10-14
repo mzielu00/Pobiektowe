@@ -18,7 +18,6 @@ public class World {
                 case "r":
                     tab[i] = Direction.r;
                     break;
-
             }
             i ++;
         }
