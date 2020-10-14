@@ -2,7 +2,26 @@ package agh.cs.lab1;
 public class World {
     public static void main(String[] args) {
         System.out.print("start\n");
-        Direction[] tab= {Direction.f, Direction.l, Direction.b, Direction.r};
+        Direction[] tab= new Direction[args.length];
+        int i = 0;
+        while(i < args.length){
+            switch(args[i]){
+                case "f":
+                    tab[i] = Direction.f;
+                    break;
+                case "b":
+                    tab[i] = Direction.b;
+                    break;
+                case "l":
+                    tab[i] = Direction.l;
+                    break;
+                case "r":
+                    tab[i] = Direction.r;
+                    break;
+
+            }
+            i ++;
+        }
         run(tab);
         System.out.print("koniec");
     }
