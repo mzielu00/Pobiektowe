@@ -1,0 +1,39 @@
+
+package agh.cs.lab2;
+
+public class World {
+    public static void main(String[] args) {
+//        Vector2D position1 = new Vector2D(1,2);
+//        System.out.println(position1);
+//        Vector2D position2 = new Vector2D(-2,1);
+//        System.out.println(position2);
+//        System.out.println(position1.add(position2));
+//        MapDirection x = MapDirection.NORTH;
+//        System.out.println(x.previous());
+//        System.out.println(MapDirection.WEST.next());
+//        System.out.println(position1.equals(position1));
+
+        /*LAB 3:*/
+        System.out.println("test move-a");
+        Animal zwierz1 = new Animal();
+        zwierz1.move(MoveDirection.RIGHT);
+        zwierz1.move(MoveDirection.FORWARD);
+        zwierz1.move(MoveDirection.FORWARD);
+        zwierz1.move(MoveDirection.FORWARD);
+        zwierz1.move(MoveDirection.BACKWARD);
+        zwierz1.move(MoveDirection.BACKWARD);
+        zwierz1.move(MoveDirection.LEFT);
+        zwierz1.move(MoveDirection.FORWARD);
+        System.out.println(zwierz1);
+
+        System.out.println("test parser:");
+        Animal zwierz2 = new Animal();
+        String[] tab = {"f", "r", "left", "scds","sa", "r", "r", "b", "b", "l", "f"};
+        MoveDirection[] arr = OptionsParser.parse(tab);
+        for (MoveDirection i : arr) {
+            System.out.println(i);
+            zwierz2.move(i);
+            System.out.println(zwierz2);
+        }
+    }
+}
