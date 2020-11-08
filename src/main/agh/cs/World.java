@@ -42,8 +42,5 @@ public class World {
         Vector2D[] positions = { new Vector2D(2,2), new Vector2D(3,4) };
         IEngine engine = new SimulationEngine(directions, map, positions);
         engine.run();
-
-        Vector2D anim1 = (((RectangularMap)(map)) .getAnimal(0).getPosition());
-        System.out.println(anim1);
     }
 }
