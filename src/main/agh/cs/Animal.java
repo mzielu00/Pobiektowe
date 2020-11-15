@@ -1,6 +1,6 @@
 package agh.cs;
 
-public class Animal{
+public class Animal implements IMapElement{
     static final int MIN_X = 0;
     static final int MAX_X = 4;
     static final int MIN_Y = 0;
@@ -9,7 +9,7 @@ public class Animal{
     public IWorldMap map;
     public Vector2D initialPosition;
     public MapDirection orientation;
-    public Vector2D position;
+    private Vector2D position;
 
     public Animal (){
         this.map = new RectangularMap(5, 10);
@@ -31,6 +31,7 @@ public class Animal{
         this.position = initialPosition;
     }
 
+    @Override
     public Vector2D getPosition() {
         return position;
     }

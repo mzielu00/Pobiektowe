@@ -36,11 +36,23 @@ public class World {
             zwierz2.move(i);
             System.out.println(zwierz2);
         }
-         */
+         LAB 4:
         MoveDirection[] directions = new OptionsParser().parse(args);
         IWorldMap map = new RectangularMap(10, 5);
         Vector2D[] positions = { new Vector2D(2,2), new Vector2D(3,4) };
         IEngine engine = new SimulationEngine(directions, map, positions);
         engine.run();
+    }
+        LAB5:
+            */
+
+        MoveDirection[] directions = new OptionsParser().parse(args);
+        IWorldMap map = new GrassField(10);
+        //IWorldMap map = new RectangularMap(10, 5);
+        Vector2D[] positions = { new Vector2D(2,2), new Vector2D(3,4) };
+        IEngine engine = new SimulationEngine(directions, map, positions);
+        engine.run();
+        System.out.println(map.toString());
+
     }
 }
