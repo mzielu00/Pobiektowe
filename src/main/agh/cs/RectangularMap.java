@@ -1,12 +1,11 @@
 package agh.cs;
 
-import java.util.LinkedList;
-
 public class RectangularMap extends AbstractWorldMap {
+
     public RectangularMap(int width, int hight) {
+        super();
         this.width = width;
         this.height = hight;
-        this.animalList = new LinkedList<Animal>();
     }
 
     @Override
@@ -15,23 +14,8 @@ public class RectangularMap extends AbstractWorldMap {
     }
 
     @Override
-    public boolean place(Animal animal) {
-        if (!isOccupied(animal.getPosition())) {
-            animalList.add(animal);
-            return true;
-        } else {
-
-            return false;
-        }
-    }
-
-    @Override
     public Object objectAt(Vector2D position) {
-        for (Animal i : animalList) {
-            if (position.equals(i.getPosition())) {
-                return i;
-            }
-        }
+        if(animalsMap.containsKey(position)) return animalsMap.get(position);
         return null;
     }
 }

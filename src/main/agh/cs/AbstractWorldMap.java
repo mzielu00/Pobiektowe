@@ -1,13 +1,18 @@
 package agh.cs;
 
-import java.util.List;
+import java.util.*;
 
-public abstract class AbstractWorldMap implements IWorldMap {
-    protected List<Animal> animalList;
+public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
+    protected Map<Vector2D, Animal> animalsMap;
+
     protected int width;
     protected int height;
 
     abstract Vector2D getEdgeVector();
+
+    public AbstractWorldMap() {
+        this.animalsMap = new LinkedHashMap<>();
+    }
 
     @Override
     public String toString() {
@@ -22,7 +27,7 @@ public abstract class AbstractWorldMap implements IWorldMap {
     @Override
     public boolean place(Animal animal) {
         if (!isOccupied(animal.getPosition())) {
-            animalList.add(animal);
+            animalsMap.put(animal.getPosition(), animal);
             return true;
         } else {
             return false;
@@ -31,18 +36,29 @@ public abstract class AbstractWorldMap implements IWorldMap {
 
     @Override
     public boolean isOccupied(Vector2D position) {
-        for (Animal i : animalList) {
-            if (position.equals(i.getPosition())) {
-                return true;
-            }
-        }
-        return false;
+        return objectAt(position) != null;
     }
 
     @Override
     public void run(MoveDirection[] directions) {
-        for (int i = 0; i <= directions.length; i++) {
-            animalList.get(i).move(directions[i]);
+        List<Animal> animals = new ArrayList<>(animalsMap.values());
+        for (int i = 0; i < directions.length; i++) {
+            animals.get(i % animals.size()).move(directions[i]);
+
+            System.out.println("Step " + i);
+            for (Animal animal : animals) {
+                System.out.println("Animal " + animals.indexOf(animal) + " position: " + animal.getPosition());
+            }
+        }
+    }
+
+    @Override
+    public void positionChanged(Vector2D oldPosition, Vector2D newPosition) {
+        Object object = objectAt(oldPosition);
+
+        if (object instanceof Animal) {
+            animalsMap.remove(((Animal) object).getPosition());
+            animalsMap.put(newPosition, (Animal) object);
         }
     }
 }

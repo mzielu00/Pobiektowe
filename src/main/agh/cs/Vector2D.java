@@ -1,5 +1,7 @@
 package agh.cs;
 
+import java.util.Objects;
+
 public class Vector2D {
     public final int x;
     public final int y;
@@ -7,6 +9,11 @@ public class Vector2D {
         this.x = x;
         this.y = y;
     }
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.x, this.y);
+    }
+
     public String toString(){
         return "(" + x + "," + y + ")";
     }

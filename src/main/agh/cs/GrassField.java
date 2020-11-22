@@ -2,17 +2,16 @@ package agh.cs;
 
 import java.util.*;
 
-
 public class GrassField extends AbstractWorldMap {
     public int numberOfGrassOnMap;
-    public List<Grass> grassList;
+    private final List<Grass> grassList;
 
     public GrassField(int numberOfGrassOnMap) {
+        super();
         width = Integer.MAX_VALUE;
         height = Integer.MAX_VALUE;
         this.numberOfGrassOnMap = numberOfGrassOnMap;
-        this.animalList = new LinkedList<Animal>();
-        this.grassList = new LinkedList<Grass>();
+        this.grassList = new LinkedList<>();
 
         addGrasses(numberOfGrassOnMap);
     }
@@ -24,22 +23,24 @@ public class GrassField extends AbstractWorldMap {
 
     @Override
     public Object objectAt(Vector2D position) {
-        List<IMapElement> mergedList = new LinkedList<>();
-        mergedList.addAll(grassList);
-        mergedList.addAll(animalList);
 
-        for (IMapElement element : mergedList) {
-            if (position.equals(element.getPosition())) {
-                return element;
+        if (animalsMap.containsKey(position)) {
+            return animalsMap.get(position);
+        } else {
+            for (Grass element : grassList) {
+                if (position.equals(element.getPosition())) {
+                    return element;
+                }
             }
+
+            return null;
         }
-        return null;
     }
 
     private int getFarthestWidth() {
         List<IMapElement> mergedList = new LinkedList<>();
         mergedList.addAll(grassList);
-        mergedList.addAll(animalList);
+        mergedList.addAll(animalsMap.values());
 
         int currentFarthest = 0;
 
@@ -55,7 +56,7 @@ public class GrassField extends AbstractWorldMap {
     private int getFarthestHeight() {
         List<IMapElement> mergedList = new LinkedList<>();
         mergedList.addAll(grassList);
-        mergedList.addAll(animalList);
+        mergedList.addAll(animalsMap.values());
 
         int currentFarthest = 0;
 

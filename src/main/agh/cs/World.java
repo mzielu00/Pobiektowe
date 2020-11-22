@@ -50,9 +50,12 @@ public class World {
         IWorldMap map = new GrassField(10);
         //IWorldMap map = new RectangularMap(10, 5);
         Vector2D[] positions = { new Vector2D(2,2), new Vector2D(3,4) };
-        IEngine engine = new SimulationEngine(directions, map, positions);
+        SimulationEngine engine = new SimulationEngine(directions, map, positions);
         engine.run();
-        System.out.println(map.toString());
 
+        Vector2D anim1 = (engine.animalslist.get(0).getPosition());
+        Vector2D anim2 = (engine.animalslist.get(1).getPosition());
+        System.out.println(anim1.toString());
+        System.out.println(anim2.toString());
     }
 }
