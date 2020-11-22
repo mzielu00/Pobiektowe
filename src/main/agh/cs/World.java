@@ -47,8 +47,8 @@ public class World {
             */
 
         MoveDirection[] directions = new OptionsParser().parse(args);
-        IWorldMap map = new GrassField(10);
-        //IWorldMap map = new RectangularMap(10, 5);
+//        IWorldMap map = new GrassField(10);
+        IWorldMap map = new RectangularMap(10, 5);
         Vector2D[] positions = { new Vector2D(2,2), new Vector2D(3,4) };
         SimulationEngine engine = new SimulationEngine(directions, map, positions);
         engine.run();

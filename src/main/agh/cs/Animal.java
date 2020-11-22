@@ -1,5 +1,8 @@
 package agh.cs;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Animal implements IMapElement{
     static final int MIN_X = 0;
     static final int MAX_X = 4;
@@ -10,6 +13,8 @@ public class Animal implements IMapElement{
     public Vector2D initialPosition;
     public MapDirection orientation;
     private Vector2D position;
+
+    private List<IPositionChangeObserver> observers = new LinkedList<>();
 
     public Animal (){
         this.map = new RectangularMap(5, 10);
@@ -47,6 +52,8 @@ public class Animal implements IMapElement{
     }
 
     public void move(MoveDirection direction) {
+        Vector2D oldPosition = position;
+
         if (direction == MoveDirection.RIGHT) {
             orientation = orientation.next();
         }
@@ -56,15 +63,34 @@ public class Animal implements IMapElement{
         if (direction == MoveDirection.FORWARD) {
             if (map.canMoveTo(orientation.toUnitVector().add(position))) {
                 position = orientation.toUnitVector().add(position);
+
+                positionChanged(oldPosition, position);
             }
         }
         if (direction == MoveDirection.BACKWARD) {
             if (map.canMoveTo(orientation.toUnitVector().opposite().add(position))) {
                 position = orientation.toUnitVector().opposite().add(position);
+
+                positionChanged(oldPosition, position);
             }
         }
-        /*System.out.println(getPosition());
-        System.out.println(toString());*/
     }
 
+    void addObserver(IPositionChangeObserver observer) {
+        observers.add(observer);
+    }
+
+    void removeObserver(IPositionChangeObserver observer) {
+        int indexOfGivenObserver = observers.indexOf(observer);
+
+        if (indexOfGivenObserver >= 0 && indexOfGivenObserver < observers.size()) {
+            observers.remove(indexOfGivenObserver);
+        }
+    }
+
+    void positionChanged(Vector2D oldPosition, Vector2D newPosition) {
+        for (IPositionChangeObserver element : observers) {
+            element.positionChanged(oldPosition, newPosition);
+        }
+    }
 }

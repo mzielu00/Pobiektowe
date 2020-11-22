@@ -1,6 +1,9 @@
 package agh.cs;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
     protected Map<Vector2D, Animal> animalsMap;
@@ -12,6 +15,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
 
     public AbstractWorldMap() {
         this.animalsMap = new LinkedHashMap<>();
+
     }
 
     @Override
@@ -28,6 +32,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
     public boolean place(Animal animal) {
         if (!isOccupied(animal.getPosition())) {
             animalsMap.put(animal.getPosition(), animal);
+            animal.addObserver(this);
             return true;
         } else {
             return false;
@@ -57,7 +62,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
         Object object = objectAt(oldPosition);
 
         if (object instanceof Animal) {
-            animalsMap.remove(((Animal) object).getPosition());
+            animalsMap.remove(oldPosition);
             animalsMap.put(newPosition, (Animal) object);
         }
     }
