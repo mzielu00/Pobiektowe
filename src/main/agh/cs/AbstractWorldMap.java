@@ -35,7 +35,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
             animal.addObserver(this);
             return true;
         } else {
-            return false;
+            throw new IllegalArgumentException ("zajete miejsce" + animal.getPosition());
         }
     }
 

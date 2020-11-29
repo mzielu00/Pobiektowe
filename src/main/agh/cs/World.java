@@ -45,17 +45,22 @@ public class World {
     }
         LAB5:
             */
+            try {
+                    MoveDirection[] directions = new OptionsParser().parse(args);
+                    IWorldMap map = new GrassField(10);
+                    // IWorldMap map = new RectangularMap(10, 5);
+                    Vector2D[] positions = {new Vector2D(2, 2), new Vector2D(2, 2), new Vector2D(3, 4)};
+                    SimulationEngine engine = new SimulationEngine(directions, map, positions);
+                    engine.run();
 
-        MoveDirection[] directions = new OptionsParser().parse(args);
-//        IWorldMap map = new GrassField(10);
-        IWorldMap map = new RectangularMap(10, 5);
-        Vector2D[] positions = { new Vector2D(2,2), new Vector2D(3,4) };
-        SimulationEngine engine = new SimulationEngine(directions, map, positions);
-        engine.run();
-
-        Vector2D anim1 = (engine.animalslist.get(0).getPosition());
-        Vector2D anim2 = (engine.animalslist.get(1).getPosition());
-        System.out.println(anim1.toString());
-        System.out.println(anim2.toString());
+                    System.out.println(map.toString());
+                    Vector2D anim1 = (engine.animalslist.get(0).getPosition());
+                    Vector2D anim2 = (engine.animalslist.get(1).getPosition());
+                    System.out.println(anim1.toString());
+                    System.out.println(anim2.toString());
+            } catch (IllegalArgumentException argumentException) {
+                    System.out.println((argumentException + "Illegal"));
+                    System.exit(1);
+            }
     }
 }

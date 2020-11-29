@@ -47,8 +47,8 @@ public class Animal implements IMapElement{
             case SOUTH: return "S";
             case EAST: return "E";
             case WEST: return "W";
+            default: throw new IllegalStateException("Unexpected value");
         }
-        return null;
     }
 
     public void move(MoveDirection direction) {
