@@ -20,7 +20,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
 
     @Override
     public String toString() {
-        return new MapVisualizer(this).draw(new Vector2D(0, 0), getEdgeVector());
+        return new MapVisualizer(this).draw(mapBoundary.getBoundary()[0], mapBoundary.getBoundary()[1]);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package agh.cs;
 
-import java.util.Comparator;
-import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -11,22 +9,31 @@ public class MapBoundary implements IPositionChangeObserver {
     private final SortedSet<Vector2D> ySet;
 
     public MapBoundary() {
-        xSet = new TreeSet<>((e1, e2) -> {
-            if (e1.getX() != e2.getX())
-                return Integer.compare(e1.getX(), e2.getX());
-            else if (e1.getY() != e2.getY())
-                return Integer.compare(e1.getY(), e2.getY());
+        xSet = new TreeSet<>((element1, element2) -> {
+            if (element1.getX() != element2.getX()) {
+                return Integer.compare(element1.getX(), element2.getX());
+            }
+            else if (element1.getY() != element2.getY()) {
+                return Integer.compare(element1.getY(), element2.getY());
+            }
             else
+            {
                 return 0;
-        });
-        ySet = new TreeSet<>((e1, e2) -> {
-            if (e1.getY() != e2.getY())
-                return Integer.compare(e1.getY(), e2.getY());
-            else if (e1.getX() != e2.getX())
-                return Integer.compare(e1.getX(), e2.getX());
-            else
+            } });
+        ySet = new TreeSet<>((element1, element2) -> {
+            if (element1.getY() != element2.getY()) {
+                return Integer.compare(element1.getY(), element2.getY());
+            }
+            else if (element1.getX() != element2.getX()) {
+                return Integer.compare(element1.getX(), element2.getX());
+            }
+            else {
                 return 0;
-        });
+            } });
+        }
+    public void addElement(Grass grass) {
+        xSet.remove(grass);
+        ySet.remove(grass);
     }
 
     public void addElement(Vector2D element) {
@@ -38,7 +45,6 @@ public class MapBoundary implements IPositionChangeObserver {
         ySet.remove(element);
     }
 
-
     @Override
     public void positionChanged(IMapElement element, Vector2D oldPosition, Vector2D newPosition) {
         removeElement(oldPosition);
@@ -46,12 +52,11 @@ public class MapBoundary implements IPositionChangeObserver {
     }
 
     public Vector2D[] getBoundary() {
-        return new Vector2D[]{new Vector2D(xSet.first().getX(), ySet.first().getY()),
-                new Vector2D(xSet.last().getX(), ySet.last().getY()) };
+        return new Vector2D[]
+                {
+                new Vector2D(xSet.first().getX(), ySet.first().getY()),
+                new Vector2D(xSet.last().getX(), ySet.last().getY())
+                };
     }
 
-    public void addElement(Grass grass) {
-        xSet.remove(grass);
-        ySet.remove(grass);
-    }
 }

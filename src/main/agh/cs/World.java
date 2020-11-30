@@ -45,40 +45,18 @@ public class World {
     }
         LAB5:
             */
-//            try {
-//                    MoveDirection[] directions = new OptionsParser().parse(args);
-//                    IWorldMap map = new GrassField(10);
-//                    // IWorldMap map = new RectangularMap(10, 5);
-//                    Vector2D[] positions = {new Vector2D(2, 2), new Vector2D(2, 2), new Vector2D(3, 4)};
-//                    SimulationEngine engine = new SimulationEngine(directions, map, positions);
-//                    engine.run();
-//
-//                    System.out.println(map.toString());
-//                    Vector2D anim1 = (engine.animalslist.get(0).getPosition());
-//                    Vector2D anim2 = (engine.animalslist.get(1).getPosition());
-//                    System.out.println(anim1.toString());
-//                    System.out.println(anim2.toString());
-//            } catch (IllegalArgumentException argumentException) {
-//                    System.out.println((argumentException + "Illegal"));
-//                    System.exit(1);
-//            }
-//    }
-//}
             try {
-////        String[] dane = {"f","f","r","l","f","f","l","f","r","b","l","f"};
                     MoveDirection[] directions = new OptionsParser().parse(args);
-                    IWorldMap map = new GrassField(6);
-//        IWorldMap map = new RectangularMap(10,5);
-                    Vector2D[] positions = {new Vector2D(2, 2), new Vector2D(3, 4)};
-//            System.out.println(positions[0] instanceof Vector2d);
-                    IEngine engine = new SimulationEngine(directions, map, positions);
-                    System.out.println(map.toString());
+                    IWorldMap map = new GrassField(10);
+                    // IWorldMap map = new RectangularMap(10, 5);
+                    Vector2D[] positions = {new Vector2D(2, 2), new Vector2D(2, 2), new Vector2D(3, 4)};
+                    SimulationEngine engine = new SimulationEngine(directions, map, positions);
                     engine.run();
-                    System.out.println("final status:");
+
                     System.out.println(map.toString());
-            }catch (IllegalArgumentException ex){
-                    System.out.println(ex);
-                    return;
+            } catch (IllegalArgumentException argumentException) {
+                    System.out.println((argumentException + "Illegal"));
+                    System.exit(1);
             }
     }
 }
