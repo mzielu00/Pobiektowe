@@ -83,6 +83,7 @@ public class GrassField extends AbstractWorldMap {
             if (objectAt(newPosition) == null) {
                 grassList.add(new Grass(newPosition));
                 currentCounter++;
+                mapBoundary.addElement(new Grass(newPosition));
             }
 
         } while (currentCounter < numberOfGrassOnMap);

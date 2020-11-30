@@ -13,7 +13,13 @@ public class Vector2D {
     public int hashCode() {
         return Objects.hash(this.x, this.y);
     }
+    public int getX() {
+        return x;
+    }
 
+    public int getY() {
+        return y;
+    }
     public String toString(){
         return "(" + x + "," + y + ")";
     }

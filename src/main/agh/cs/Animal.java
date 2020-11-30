@@ -90,7 +90,7 @@ public class Animal implements IMapElement{
 
     void positionChanged(Vector2D oldPosition, Vector2D newPosition) {
         for (IPositionChangeObserver element : observers) {
-            element.positionChanged(oldPosition, newPosition);
+            element.positionChanged(this, oldPosition, newPosition);
         }
     }
 }

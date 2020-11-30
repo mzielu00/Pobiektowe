@@ -7,7 +7,7 @@ import java.util.Map;
 
 public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
     protected Map<Vector2D, Animal> animalsMap;
-
+    protected MapBoundary mapBoundary;
     protected int width;
     protected int height;
 
@@ -58,12 +58,13 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
     }
 
     @Override
-    public void positionChanged(Vector2D oldPosition, Vector2D newPosition) {
+    public void positionChanged(IMapElement element, Vector2D oldPosition, Vector2D newPosition) {
         Object object = objectAt(oldPosition);
 
         if (object instanceof Animal) {
             animalsMap.remove(oldPosition);
             animalsMap.put(newPosition, (Animal) object);
+            mapBoundary.positionChanged(element, oldPosition, newPosition);
         }
     }
 }
